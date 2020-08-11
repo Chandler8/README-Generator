@@ -1,0 +1,30 @@
+{
+  "name": "readme-generator",
+  "version": "1.0.0",
+  "description": "Showcasing the power of the terminal in Node.js by creating a README-Generator",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "inquirer": "^7.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chandler8/README-Generator.git"
+  },
+  "keywords": [
+    "Node",
+    "terminal",
+    "command line",
+    "JavaScript"
+  ],
+  "author": "Chandler Lowrance",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chandler8/README-Generator/issues"
+  },
+  "homepage": "https://github.com/Chandler8/README-Generator#readme"
+}
