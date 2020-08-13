@@ -1,7 +1,3 @@
-// Since this is a CLI app (command line input) we need to also incorporate a CLI module
-var cli = require("./cli-module");
-const generateReadme = cli.generateReadme;
-
 // List out my NPM dependencies and require them
 var inquirer = require("inquirer");
 var fs = require("fs");
@@ -87,15 +83,18 @@ inquirer
         // Fulfill the .then promise given in the .prompt function
         .then((answer) => {
 
+          // Let user create their desired README name
+          const nameFile = answer.title.toLowerCase().split(' ').join('') + "_README.md";
+
           // Incorporate badges
           let badge;
           const badgeFunction = answer => {
               if (answer.license === "MIT") {
-                  badge = "![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)";
+                  badge = "![License](https://img.shields.io/badge/License-MIT-yellow.svg)";
               } else if (answer.license === "APACHE") {
                   badge = "![License](https://img.shields.io/badge/License-Apache-blueviolet.svg)";
               } else if (answer.license === "GPL") {
-                  badge = "![License: GPL v3](https://img.shields.io/badge/License-GPL-important.svg)";
+                  badge = "![License](https://img.shields.io/badge/License-GPL-important.svg)";
               } else {
                   badge = "";
               }
@@ -110,48 +109,36 @@ ${badge}
 ## Description
 - ${answer.description}
 
-## TableofContents
+## Table of Contents
 - ${answer.tableOfContents}
 
-## Installation Instructions
+## Installation
 - ${answer.installation}
 
-## Usage Information
+## Usage
 - ${answer.usage}
 
 ## Liscense
 - ${answer.liscense}
 
-## Contributer Guidelines
+## Contributer
 - ${answer.contributers}
 
-## Test Instructions
+## Tests
 - ${answer.tests}
 
 ## Questions
 ${answer.questions}
 - Feel free to send me an email regarding this project or with any questions at: ${answer.email}
 - To view my Github profile please click here: https://github.com/${answer.user}
-- ${githubAvatar}`;
+- User Avatar: ${githubAvatar}`;
 
-            // Call this function from the cli module
-          generateReadme();
-
-        // Then send everything to the readme via an fs.appendFile function
-          fs.appendFile("README1.md", readmeContent, function (err) {
-            if (err) {
-              console.log(err);
-              return;
-            } 
-            else {
-              console.log("Successfully appended!");
-            }
+fs.writeFile(nameFile, readmeContent, function (err) {
+  if (err) {
+      console.log(err);
+  }
+  console.log("Success!")
+})
           });
-        })
-        .catch((err) => {
-          if (err) {
-            console.log(err);
-          }
         });
       });
-  });
