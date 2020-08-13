@@ -19,14 +19,22 @@ inquirer
     const queryUrl = `https://api.github.com/users/${username}`;
 
     axios.get(queryUrl).then(function (res) {
-      const githubAvitar = res.data.avatar_url;
-      console.log(`Your GitHub Avitar: ${githubAvitar}`);
-      const githubEmail = res.data.email;
-      console.log(`Your GitHub email: ${githubEmail}`);
+      const githubAvatar = res.data.avatar_url;
+      console.log(`Your GitHub Avatar: ${githubAvatar}`);
 
       // inquirer .prompt function that will hold my object arrays
       inquirer
         .prompt([
+          {
+            type: "input",
+            message: "Input Github username again, we just want to be sure :)",
+            name: "user",
+          },
+          {
+            type: "input",
+            message: "Input email address here.",
+            name: "email",
+          },
           {
             type: "input",
             message: "Input title here.",
@@ -44,27 +52,29 @@ inquirer
           },
           {
             type: "input",
-            message: "Input installation here.",
+            message: "Input installation instructions here.",
             name: "installation",
           },
           {
             type: "input",
-            message: "Input usage here.",
+            message: "Input usage information here.",
             name: "usage",
           },
           {
-            type: "input",
-            message: "Input liscense here.",
+            type: "list",
+            message: "Please choose a liscense option from the list.",
             name: "liscense",
+            choices: ["MIT", "APACHE", "GPL", "none"]
+        
           },
           {
             type: "input",
-            message: "Input contributers here.",
+            message: "Input contributer guidelines here.",
             name: "contributers",
           },
           {
             type: "input",
-            message: "Input tests here.",
+            message: "Input test instructions here.",
             name: "tests",
           },
           {
@@ -76,8 +86,26 @@ inquirer
 
         // Fulfill the .then promise given in the .prompt function
         .then((answer) => {
+
+          // Incorporate badges
+          let badge;
+          const badgeFunction = answer => {
+              if (answer.license === "MIT") {
+                  badge = "![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)";
+              } else if (answer.license === "APACHE") {
+                  badge = "![License](https://img.shields.io/badge/License-Apache-blueviolet.svg)";
+              } else if (answer.license === "GPL") {
+                  badge = "![License: GPL v3](https://img.shields.io/badge/License-GPL-important.svg)";
+              } else {
+                  badge = "";
+              }
+          }
+          badgeFunction(answer);
+
             // Use back tick notation to print our inputs
           const readmeContent = `# ${answer.title}
+
+${badge}
 
 ## Description
 - ${answer.description}
@@ -85,31 +113,32 @@ inquirer
 ## TableofContents
 - ${answer.tableOfContents}
 
-## Installation
+## Installation Instructions
 - ${answer.installation}
 
-## Usage
+## Usage Information
 - ${answer.usage}
 
 ## Liscense
 - ${answer.liscense}
 
-## Contributers
+## Contributer Guidelines
 - ${answer.contributers}
 
-## Tests
+## Test Instructions
 - ${answer.tests}
 
 ## Questions
 ${answer.questions}
-- ${githubAvitar}
-- ${githubEmail}`;
+- Feel free to send me an email regarding this project or with any questions at: ${answer.email}
+- To view my Github profile please click here: https://github.com/${answer.user}
+- ${githubAvatar}`;
 
             // Call this function from the cli module
           generateReadme();
 
         // Then send everything to the readme via an fs.appendFile function
-          fs.appendFile("README.md", readmeContent, function (err) {
+          fs.appendFile("README1.md", readmeContent, function (err) {
             if (err) {
               console.log(err);
               return;
@@ -124,5 +153,5 @@ ${answer.questions}
             console.log(err);
           }
         });
-    });
+      });
   });

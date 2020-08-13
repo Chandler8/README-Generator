@@ -4,7 +4,7 @@ var fs = require('fs');
 // export the module to our index.js file for usage
 module.exports = {
     generateReadme: () => {
-        fs.writeFile("README.md",'', function(err) {
+        fs.writeFile("README1.md",'', function(err) {
         if (err) {
             console.log(err);
             return;
