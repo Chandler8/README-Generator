@@ -64,7 +64,9 @@ Reach out to me via email regarding any questions or concerns with this project:
 
 [<img src="https://avatars0.githubusercontent.com/u/65209786?s=400&u=cb17a056cc6e4ab1216a4b19a6d190d5a6727651&v=4" width="100px;"/><br /><sub><b>Chandler Lowrance</b></sub>](https://github.com/Chandler8)<br />[💻](https://github.com/Chandler8?tab=repositories "Repositories")
 
-# Images
+# Media
+
+​![Readme gif](photos/faster_readme.gif)
 
 ![](photos/generator1.JPG)
 ![](photos/generator2.JPG)
