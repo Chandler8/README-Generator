@@ -43,11 +43,6 @@ inquirer
           },
           {
             type: "input",
-            message: "Input table of contents here.",
-            name: "tableOfContents",
-          },
-          {
-            type: "input",
             message: "Input installation instructions here.",
             name: "installation",
           },
@@ -104,13 +99,18 @@ inquirer
             // Use back tick notation to print our inputs
           const readmeContent = `# ${answer.title}
 
-${badge}
+${answer.badge}
 
 ## Description
 - ${answer.description}
 
 ## Table of Contents
-- ${answer.tableOfContents}
+*[Installation](#installation)
+*[Usage](#usage)
+*[License](#license)
+*[Contribution Guidelines](#contribution-guidelines)
+*[Tests](#tests)
+*[Questions](#questions)
 
 ## Installation
 - ${answer.installation}
@@ -121,7 +121,7 @@ ${badge}
 ## Liscense
 - ${answer.liscense}
 
-## Contributer
+## Contributers
 - ${answer.contributers}
 
 ## Tests
